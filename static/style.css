@@ -1,0 +1,252 @@
+/* Crack the Bot : même univers visuel que l'affiche MicDay (teal sombre, cyan lumineux).
+   Polices embarquées dans static/fonts : aucune connexion internet nécessaire. */
+
+@font-face { font-family: "Cormorant Garamond"; font-style: normal; font-weight: 600; font-display: swap;
+  src: url("/static/fonts/cormorant-garamond-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Cormorant Garamond"; font-style: normal; font-weight: 700; font-display: swap;
+  src: url("/static/fonts/cormorant-garamond-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Cormorant Garamond"; font-style: italic; font-weight: 500; font-display: swap;
+  src: url("/static/fonts/cormorant-garamond-latin-500-italic.woff2") format("woff2"); }
+@font-face { font-family: "Jost"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("/static/fonts/jost-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Jost"; font-style: normal; font-weight: 500; font-display: swap;
+  src: url("/static/fonts/jost-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Jost"; font-style: normal; font-weight: 600; font-display: swap;
+  src: url("/static/fonts/jost-latin-600-normal.woff2") format("woff2"); }
+
+:root {
+  --bg-deep: #031419;
+  --bg-mid: #06303a;
+  --panel: #082e36;
+  --panel-2: #0f5560;
+  --line: #1d6b75;
+  --cyan: #94f5f2;
+  --teal: #2fd3d3;
+  --text: #e9fbfb;
+  --muted: #9cc5c9;
+  --coral: #ff9a86;
+  --ink: #032229;
+  --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --sans: "Jost", system-ui, "Segoe UI", Roboto, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { color-scheme: dark; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: var(--text);
+  background:
+    radial-gradient(1100px 520px at 15% -8%, #0b4c57 0%, transparent 62%),
+    linear-gradient(180deg, var(--bg-deep) 0%, #05262e 55%, #04202a 100%);
+  background-attachment: fixed;
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+:focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; }
+
+.shell { max-width: 780px; margin: 0 auto; padding: 22px 16px 28px; }
+
+/* Cormorant utilise par défaut des chiffres « elzéviriens » : le 1 ressemble à un petit I.
+   Pour tout ce qui est un nombre à lire vite (niveaux, chrono, classement), on force les chiffres alignés. */
+.title, .tagline, .level-title, .step, .rank, .pts, .end-title, .reveal h3, .admin h1, .score-unit {
+  font-variant-numeric: lining-nums;
+}
+
+/* ---- marque ---------------------------------------------------------- */
+.brand { display: flex; align-items: center; gap: 12px; color: var(--muted); font-weight: 500; }
+.mark { display: grid; grid-template-columns: repeat(2, 14px); gap: 3px; }
+.mark i { width: 14px; height: 14px; background: var(--teal); display: block; }
+.mark i:nth-child(1) { background: #3d8a94; }
+.mark i:nth-child(4) { background: #3d8a94; }
+
+/* ---- titre lumineux (l'élément mémorable) ---------------------------- */
+.title {
+  margin: 0.35em 0 0;
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(3.2rem, 11vw, 5.8rem);
+  line-height: 1;
+  color: var(--cyan);
+  text-shadow: 0 0 0.3em rgba(148, 245, 242, 0.55), 0 0 1.1em rgba(47, 211, 211, 0.35);
+}
+.tagline {
+  margin: 0.3em 0 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.3rem, 3.4vw, 1.75rem);
+  color: var(--text);
+}
+
+/* ---- écran de départ ------------------------------------------------- */
+.rules { margin: 1.6rem 0; padding: 0; list-style: none; display: grid; gap: 0.7rem; max-width: 60ch; }
+.rules li { padding-left: 1.4rem; position: relative; color: var(--text); }
+.rules li::before {
+  content: ""; position: absolute; left: 0; top: 0.5em; width: 0.6rem; height: 0.6rem; background: var(--teal);
+}
+.start-form label, .guess label { display: block; font-weight: 600; margin-bottom: 0.45rem; }
+.row { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.row input { flex: 1 1 10rem; min-width: 0; }
+
+input[type="text"],
+input[type="password"] {
+  font: inherit;
+  color: var(--text);
+  background: #04222a;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.7rem 0.9rem;
+}
+input[type="password"]::placeholder,
+input[type="text"]::placeholder { color: #6f9ca1; }
+input[type="password"]:focus-visible,
+input[type="text"]:focus-visible { border-color: var(--cyan); outline-offset: 1px; }
+input[type="password"]:disabled,
+input[type="text"]:disabled { opacity: 0.55; }
+
+.btn {
+  font: inherit; font-weight: 600; cursor: pointer;
+  color: var(--ink); background: var(--cyan);
+  border: 0; border-radius: 10px; padding: 0.7rem 1.3rem;
+  transition: background 0.15s;
+}
+.btn:hover:not(:disabled) { background: #b8fbf8; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-alt { background: var(--teal); }
+.btn-alt:hover:not(:disabled) { background: #5ae6e6; }
+.btn-quiet {
+  font: inherit; color: var(--muted); background: none; border: 0; padding: 0.3rem 0;
+  text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
+}
+.btn-quiet:hover { color: var(--text); }
+
+.msg { min-height: 1.5em; margin: 0.5rem 0 0; color: var(--muted); }
+.msg.bad { color: var(--coral); }
+.msg.good { color: var(--cyan); }
+.warn { color: var(--coral); }
+
+/* ---- partie ---------------------------------------------------------- */
+.gamebar { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; flex-wrap: wrap; margin: 1.2rem 0 0.9rem; }
+.track { display: flex; align-items: center; list-style: none; margin: 0; padding: 0; }
+.track li { display: flex; align-items: center; }
+.track li + li::before { content: ""; width: 1.4rem; height: 2px; background: var(--line); }
+.step {
+  width: 2.4rem; height: 2.4rem; display: grid; place-items: center;
+  border: 1px solid var(--line); border-radius: 4px;
+  font-family: var(--serif); font-weight: 700; font-size: 1.3rem; color: var(--muted);
+}
+.step.done { background: var(--teal); border-color: var(--teal); color: var(--ink); }
+.step.current { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 14px rgba(148, 245, 242, 0.55); }
+.level-title { margin: 0.6rem 0 0; font-family: var(--serif); font-weight: 600; font-size: 1.5rem; }
+
+.clock { text-align: right; margin-left: auto; }
+.timer {
+  font-family: var(--serif); font-weight: 600; line-height: 1;
+  font-size: clamp(2.8rem, 9vw, 4.2rem);
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--cyan);
+  text-shadow: 0 0 0.3em rgba(148, 245, 242, 0.45);
+}
+.timer.low { color: var(--coral); text-shadow: 0 0 0.3em rgba(255, 154, 134, 0.45); }
+.timer-note { margin: 0.2rem 0 0; min-height: 1.5em; color: var(--muted); font-size: 0.95rem; }
+
+.log {
+  display: flex; flex-direction: column; gap: 0.6rem;
+  /* La conversation prend la place restante : « Valider » et « Terminer » restent visibles sans défiler
+     sur un écran de portable (testé à 800 px de haut). */
+  height: clamp(11rem, calc(100vh - 32rem), 26rem); overflow-y: auto;
+  padding: 1rem; background: rgba(3, 20, 25, 0.55);
+  border: 1px solid var(--line); border-radius: 14px;
+}
+.log:empty::before { content: "Écris au gardien pour lancer le chrono."; color: var(--muted); margin: auto; }
+
+.bubble { max-width: 86%; padding: 0.6rem 0.9rem; border-radius: 14px; overflow-wrap: anywhere; white-space: pre-wrap; }
+.bubble.user { align-self: flex-end; background: var(--panel-2); border-bottom-right-radius: 4px; }
+.bubble.guardian { align-self: flex-start; background: var(--panel); border: 1px solid var(--line); border-bottom-left-radius: 4px; }
+.bubble.blocked { border-color: var(--coral); color: var(--coral); }
+.note { align-self: center; max-width: 92%; text-align: center; color: var(--muted); font-size: 0.95rem; }
+.note.error { color: var(--coral); }
+.note.good { color: var(--cyan); }
+
+.dots span { display: inline-block; width: 0.45rem; height: 0.45rem; margin-right: 0.25rem; border-radius: 50%; background: var(--muted); animation: blink 1.2s infinite; }
+.dots span:nth-child(2) { animation-delay: 0.2s; }
+.dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes blink { 0%, 80%, 100% { opacity: 0.25; } 40% { opacity: 1; } }
+
+.chat-form { display: flex; gap: 0.6rem; margin-top: 0.8rem; }
+.chat-form input { flex: 1; min-width: 0; }
+
+.quota { margin: 0.45rem 0 0; min-height: 1.5em; color: var(--muted); font-size: 0.95rem; }
+.quota.low { color: var(--coral); }
+.guess { margin-top: 1.1rem; padding: 1rem 1.1rem; background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--cyan); border-radius: 10px; }
+.foot { margin: 1.2rem 0 0; text-align: center; }
+
+/* ---- fin de partie --------------------------------------------------- */
+.end-title { margin: 1.4rem 0 0; font-family: var(--serif); font-weight: 700; font-size: clamp(2rem, 6vw, 3rem); line-height: 1.1; color: var(--cyan); }
+.score { margin: 0.6rem 0 0; display: flex; align-items: baseline; gap: 0.6rem; }
+.score-num { font-family: var(--serif); font-weight: 700; font-size: clamp(4rem, 16vw, 7rem); line-height: 1; font-variant-numeric: lining-nums; color: var(--text); text-shadow: 0 0 0.25em rgba(148, 245, 242, 0.45); }
+.score-unit { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.8rem; color: var(--muted); }
+.end-details { margin: 0.2rem 0 0; color: var(--muted); max-width: 60ch; }
+.reveal { margin: 1.8rem 0; padding: 1.2rem 1.3rem; background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--teal); border-radius: 10px; display: grid; grid-template-columns: 1fr auto; gap: 1rem 1.4rem; align-items: center; }
+.reveal h3 { margin: 0 0 0.3rem; font-family: var(--serif); font-weight: 700; font-size: 1.6rem; }
+.reveal p { margin: 0; max-width: 56ch; }
+@media (max-width: 560px) { .reveal { grid-template-columns: 1fr; } }
+
+.qr-slot { width: 9rem; height: 9rem; display: grid; place-items: center; text-align: center; border: 2px dashed var(--line); border-radius: 12px; color: var(--muted); font-size: 0.9rem; padding: 0.5rem; }
+.qr-slot.has-img { border: 0; padding: 0; background: #fff; border-radius: 8px; }
+.qr-slot img { width: 100%; height: 100%; display: block; object-fit: contain; }
+
+/* ---- classement (projecteur) ---------------------------------------- */
+body.board { min-height: 100vh; }
+.board-shell { max-width: 1400px; margin: 0 auto; padding: 2vh 4vw 1.6vh; min-height: 100vh; display: flex; flex-direction: column; }
+.board-head { text-align: center; }
+.board-head .title { font-size: clamp(3rem, 10vh, 7rem); }
+.board-head .tagline { font-size: clamp(1.15rem, 3vh, 2rem); }
+.board-main { flex: 1; margin: 1.6vh 0; }
+.ranking { width: 100%; border-collapse: separate; border-spacing: 0 0.7vh; }
+.ranking td { line-height: 1.1; padding: 0.5vh 1.2vw; font-size: clamp(1rem, 2.5vh, 1.8rem); background: rgba(8, 46, 54, 0.7); vertical-align: middle; }
+.ranking td:first-child { border-radius: 12px 0 0 12px; width: 7vw; text-align: center; }
+.ranking td:last-child { border-radius: 0 12px 12px 0; text-align: right; }
+.ranking .rank { font-family: var(--serif); font-weight: 700; font-size: clamp(1.4rem, 3.7vh, 2.8rem); line-height: 1; color: var(--muted); }
+.ranking .who { font-weight: 600; overflow-wrap: anywhere; }
+.ranking .pts { font-family: var(--serif); font-weight: 700; font-variant-numeric: lining-nums tabular-nums; font-size: clamp(1.3rem, 3.4vh, 2.6rem); line-height: 1; white-space: nowrap; }
+.ranking tr.podium td { background: var(--panel-2); }
+.ranking tr.podium .rank { color: var(--cyan); text-shadow: 0 0 0.35em rgba(148, 245, 242, 0.6); }
+.ranking tr.podium td:first-child { box-shadow: inset 5px 0 0 var(--cyan); }
+.sqs { display: inline-flex; gap: 0.35rem; }
+.sq { width: 1.1rem; height: 1.1rem; border: 1px solid var(--line); border-radius: 2px; }
+.sq.on { background: var(--teal); border-color: var(--teal); }
+.empty-board { text-align: center; font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(1.5rem, 4vh, 2.6rem); color: var(--muted); margin-top: 8vh; }
+.board-foot { display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
+.board-foot .join { display: flex; align-items: center; gap: 1.2rem; font-family: var(--serif); font-weight: 600; font-size: clamp(1.2rem, 3vh, 2rem); }
+.board-foot .qr-slot { width: clamp(5rem, 11vh, 8rem); height: clamp(5rem, 11vh, 8rem); font-size: 0.75rem; }
+.conn { margin: 0; color: var(--coral); }
+
+/* ---- admin ----------------------------------------------------------- */
+.admin h1 { font-family: var(--serif); font-size: 2.4rem; margin: 1rem 0 0.4rem; }
+.admin table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+.admin th, .admin td { text-align: left; padding: 0.55rem 0.6rem; border-bottom: 1px solid var(--line); }
+.admin th { color: var(--muted); font-weight: 500; }
+.admin .actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1rem 0; }
+.btn-danger { background: var(--coral); }
+.btn-danger:hover:not(:disabled) { background: #ffb4a5; }
+.status-line { padding: 0.6rem 0.9rem; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
+
+@media (max-width: 560px) {
+  .clock { margin-left: 0; text-align: left; width: 100%; }
+  .log { height: clamp(9rem, 30vh, 15rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

@@ -1,0 +1,18 @@
+# Réglages et secrets de CE PC (jeton admin, modèle choisi) : jamais dans git
+.env
+
+# Classement, copies de sécurité, rapports de mesure : propres à chaque PC (le dossier reste grâce à .gitkeep)
+data/*
+!data/.gitkeep
+
+# Environnement Python et caches : se recréent avec ./run.sh --install
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Fichiers d'éditeur
+.idea/
+.vscode/
+*.swp
+.DS_Store

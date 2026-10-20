@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crack the Bot, classement</title>
+  <link rel="icon" href="data:,">
+  <link rel="preload" href="/static/fonts/cormorant-garamond-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="board">
+  <div class="board-shell">
+    <header class="board-head">
+      <h1 class="title">Crack the Bot</h1>
+      <p class="tagline">Fais dire son mot secret au gardien. Les 3 meilleurs scores gagnent un prix.</p>
+    </header>
+
+    <main class="board-main">
+      <table class="ranking" aria-label="Classement des 10 meilleurs joueurs">
+        <thead class="sr-only"><tr><th scope="col">Place</th><th scope="col">Joueur</th><th scope="col">Niveaux réussis</th><th scope="col">Points</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <p id="empty" class="empty-board" hidden>Personne n'a encore joué. Le premier score s'affichera ici.</p>
+    </main>
+
+    <footer class="board-foot">
+      <p id="conn" class="conn" role="status"></p>
+      <div class="join">
+        <span>Rejoins le département IA du club</span>
+        <div id="qr-slot" class="qr-slot"></div>
+      </div>
+    </footer>
+  </div>
+  <script type="module" src="/static/board.js"></script>
+</body>
+</html>

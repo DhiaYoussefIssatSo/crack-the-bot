@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crack the Bot</title>
+  <link rel="icon" href="data:,">
+  <link rel="preload" href="/static/fonts/cormorant-garamond-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="player">
+  <div class="shell">
+    <header class="brand">
+      <span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span>Microsoft IssatSo Club, département IA</span>
+    </header>
+
+    <main>
+      <section id="screen-start" aria-labelledby="start-title">
+        <h1 id="start-title" class="title">Crack the Bot</h1>
+        <p class="tagline">Fais dire son mot secret au gardien.</p>
+        <ul id="rules" class="rules"></ul>
+        <form id="start-form" autocomplete="off">
+          <label for="name">Ton prénom (ou vos deux prénoms si vous jouez à deux)</label>
+          <div class="row">
+            <input id="name" name="name" type="text" maxlength="30" required>
+            <button id="start-btn" class="btn" type="submit">Commencer</button>
+          </div>
+          <p id="start-msg" class="msg" role="status"></p>
+        </form>
+      </section>
+
+      <section id="screen-game" hidden aria-label="Partie en cours">
+        <div class="gamebar">
+          <div>
+            <ol id="track" class="track" aria-label="Niveaux"></ol>
+            <p id="level-title" class="level-title"></p>
+          </div>
+          <div class="clock">
+            <div id="timer" class="timer" role="timer" aria-live="off">0:00</div>
+            <p id="timer-note" class="timer-note"></p>
+          </div>
+        </div>
+
+        <div id="log" class="log" role="log" aria-live="polite" aria-label="Conversation avec le gardien"></div>
+
+        <form id="chat-form" class="chat-form" autocomplete="off">
+          <label for="msg" class="sr-only">Message pour le gardien</label>
+          <input id="msg" name="msg" type="text" placeholder="Écris au gardien…">
+          <button id="send-btn" class="btn" type="submit">Envoyer</button>
+        </form>
+        <p id="quota" class="quota" role="status"></p>
+
+        <form id="guess-form" class="guess" autocomplete="off">
+          <label for="guess">Tu as trouvé le mot ?</label>
+          <div class="row">
+            <input id="guess" name="guess" type="text" maxlength="60" placeholder="Tape le mot ici">
+            <button id="guess-btn" class="btn btn-alt" type="submit">Valider</button>
+          </div>
+          <p id="guess-msg" class="msg" role="status"></p>
+        </form>
+
+        <p class="foot"><button id="quit-btn" class="btn-quiet" type="button">Terminer la partie</button></p>
+      </section>
+
+      <section id="screen-end" hidden aria-labelledby="end-title">
+        <h2 id="end-title" class="end-title"></h2>
+        <p class="score"><span id="end-points" class="score-num"></span><span class="score-unit">points</span></p>
+        <p id="end-details" class="end-details"></p>
+        <div class="reveal">
+          <div>
+            <h3>Ce que tu viens de faire</h3>
+            <p id="reveal-text"></p>
+          </div>
+          <div id="qr-slot" class="qr-slot"></div>
+        </div>
+        <button id="again-btn" class="btn" type="button">Nouvelle partie</button>
+      </section>
+    </main>
+  </div>
+  <script type="module" src="/static/player.js"></script>
+</body>
+</html>

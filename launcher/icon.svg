@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Crack the Bot">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b4a52"/><stop offset="1" stop-color="#03181d"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="48" fill="url(#bg)"/>
+  <path d="M128 36 200 64v62c0 44-30 78-72 94-42-16-72-50-72-94V64z" fill="none" stroke="#7ff5f2" stroke-width="10" stroke-linejoin="round"/>
+  <circle cx="128" cy="116" r="17" fill="#7ff5f2"/>
+  <path d="M120 126h16l6 52h-28z" fill="#7ff5f2"/>
+</svg>
