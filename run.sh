@@ -15,7 +15,7 @@ fi
 # requirements.lock.txt (s'il existe) = les versions exactes testées ; sinon requirements.txt (versions minimales).
 REQ=requirements.txt
 [ -f requirements.lock.txt ] && REQ=requirements.lock.txt
-.venv/bin/pip install -q -r "$REQ"
+.venv/bin/pip install -q -r "$REQ" || .venv/bin/pip install -q -r requirements.txt
 
 # ./run.sh --install : prépare seulement l'environnement (utile avant tools/redteam.py), sans lancer le jeu.
 if [ "${1:-}" = "--install" ]; then
