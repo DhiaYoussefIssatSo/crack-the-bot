@@ -25,7 +25,7 @@ ollama pull gemma3:4b
 # 4. Le projet (dépôt privé : Dhia doit t'avoir ajouté comme collaborateur ; accepte l'invitation reçue par e-mail)
 sudo apt install -y gh
 gh auth login          # choisis GitHub.com, puis HTTPS, puis connexion par le navigateur
-gh repo clone DhiaYoussefIssatSo/crack_the_bot crack-the-bot
+gh repo clone DhiaYoussefIssatSo/crack-the-bot crack-the-bot
 cd crack-the-bot
 
 # 5. Réglages de ce PC
