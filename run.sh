@@ -15,7 +15,7 @@ fi
 # requirements.lock.txt (s'il existe) = les versions exactes testées ; sinon requirements.txt (versions minimales).
 REQ=requirements.txt
 [ -f requirements.lock.txt ] && REQ=requirements.lock.txt
-.venv/bin/pip install -q -r "$REQ" || .venv/bin/pip install -q -r requirements.txt
+.venv/bin/pip install -q -r "$REQ"
 
 # ./run.sh --install : prépare seulement l'environnement (utile avant tools/redteam.py), sans lancer le jeu.
 if [ "${1:-}" = "--install" ]; then
@@ -24,12 +24,10 @@ if [ "${1:-}" = "--install" ]; then
 fi
 
 # Réglages optionnels : copie .env.example en .env puis modifie-le.
-if [ -f .env ]; then
-  set -a
-  # shellcheck disable=SC1091
-  . ./.env
-  set +a
-fi
+# (une variable écrite devant la commande, ex. « BACKEND=mock ./run.sh », garde la priorité sur .env)
+# shellcheck disable=SC1091
+. ./env_loader.sh
+load_dotenv_keep_terminal
 
 echo "Adresses :  http://${HOST:-127.0.0.1}:${PORT:-8000}/  (jeu)   /board  (projecteur)   /admin"
 

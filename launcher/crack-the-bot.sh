@@ -11,12 +11,9 @@ pause_on_error() {  # empêche la fenêtre de se fermer avant d'avoir lu l'erreu
   exit 1
 }
 
-if [ -f .env ]; then
-  set -a
-  # shellcheck disable=SC1091
-  . ./.env
-  set +a
-fi
+# shellcheck disable=SC1091
+. ./env_loader.sh
+load_dotenv_keep_terminal
 PORT="${PORT:-8000}"
 URL="http://127.0.0.1:${PORT}"
 OLLAMA="${OLLAMA_URL:-http://127.0.0.1:11434}"

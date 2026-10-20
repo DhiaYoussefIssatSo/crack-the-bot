@@ -38,7 +38,7 @@ chmod +x run.sh && ./run.sh --install             # prépare l'environnement Pyt
 ./run.sh                                          # lance le jeu
 ```
 
-Prérequis : Python 3.10 ou plus récent (testé sous Python 3.13 et 3.14) et `python3-venv`
+Prérequis : Python 3.10 ou plus récent (je n'ai testé que sous Python 3.13) et `python3-venv`
 (`sudo apt install python3-venv` s'il manque). Au lancement, le terminal affiche les adresses et le **jeton admin** :
 
 | Page | Adresse | Rôle |
@@ -136,7 +136,7 @@ propre à mon environnement : sur votre PC, donnez le vôtre avec la variable `C
   un PC. Techniquement, plusieurs parties peuvent coexister, mais un seul appel au modèle est traité à la fois :
   les autres attendent leur tour, ce qui ralentit les réponses (le chrono de chaque joueur reste en pause pendant
   l'attente).
-- **Python 3.10 à 3.12** : testé seulement sous 3.13 et 3.14.
+- **Python 3.10 à 3.12** : je n'ai testé que 3.13.
 
 ## Contenu
 
